@@ -48,7 +48,26 @@ public class GUICreator extends Application {
 	}
 
 	public void showFileInfoDialog (File file) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUICreator.class.getResource("DialogWindow.fxml"));
+            AnchorPane anchor = (AnchorPane) loader.load();
 
+            Stage stage = new Stage();
+            stage.setTitle("FileInformation");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryStage);
+            Scene scene = new Scene(anchor);
+            stage.setScene(scene);
+
+            DialogWindowController controller = loader.getController();
+            controller.setDialogStage(stage);
+            controller.setFileInfo(file);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public void showProgressOfOperation(Path path, Path destinition, String typeOfOperation) {

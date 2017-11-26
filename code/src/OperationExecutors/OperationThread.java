@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
+import View.DialogCloser;
 import View.GUICreator;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -37,6 +38,7 @@ public class OperationThread extends Thread {
 			case "Delete":
 				deleteOperation();
 			}
+			Platform.runLater(new DialogCloser(stage, mainApp));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
