@@ -49,7 +49,7 @@ public class GUICreator extends Application {
 	}
 
 	public void showProgressOfOperation(Path path, Path destinition, String typeOfOperation) {
-
+		
 	}
 
 	public GUICreator() throws IOException {
