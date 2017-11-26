@@ -9,11 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GUICreator extends Application {
@@ -40,6 +42,14 @@ public class GUICreator extends Application {
 
 	public StringBuffer getCurrentDirectoryForSecond() {
 		return baseDirectoryForTableTwo;
+	}
+
+	public void showFileInfoDialog (File file) {
+
+	}
+
+	public void showProgressOfOperation(Path path, Path destinition, String typeOfOperation) {
+
 	}
 
 	public GUICreator() throws IOException {
