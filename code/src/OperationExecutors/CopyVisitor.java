@@ -8,10 +8,10 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class FileCopyVisitor extends SimpleFileVisitor<Path> {
+public class CopyVisitor extends SimpleFileVisitor<Path> {
 	private Path source, destinition;
 
-	public FileCopyVisitor(Path source, Path destinition) {
+	public CopyVisitor(Path source, Path destinition) {
 		this.source = source;
 		this.destinition = destinition;
 	}

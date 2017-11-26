@@ -1,5 +1,8 @@
 package View;
 
+import OperationExecutors.OperationThread;
+import View.Controller.DialogWindowController;
+import View.Controller.MainWindowController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +52,27 @@ public class GUICreator extends Application {
 	}
 
 	public void showProgressOfOperation(Path path, Path destinition, String typeOfOperation) {
-		
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GUICreator.class.getResource("DialogWindow.fxml"));
+            AnchorPane anchor = (AnchorPane) loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("ProgressOfOperation");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(null);
+            Scene scene = new Scene(anchor);
+            stage.setScene(scene);
+
+            DialogWindowController controller = loader.getController();
+            controller.setDialogStage(stage);
+            stage.show();
+            OperationThread thread = new OperationThread(path, destinition, typeOfOperation,
+                    MainWindowController.getMainApp(), stage);
+            thread.start();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	public GUICreator() throws IOException {

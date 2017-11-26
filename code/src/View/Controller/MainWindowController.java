@@ -89,6 +89,10 @@ public class MainWindowController {
 		guiCreator.createNewListOfFilesForTableTwo();
 	}
 
+	public static GUICreator getMainApp() {
+		return guiCreator;
+	}
+
 	private void goNextDirectorySecondTable(FileInformationTwo file) throws IOException {
 		StringBuffer currentDirectory = guiCreator.getCurrentDirectoryForSecond();
 		previousDirectoryForSecondTable.replace(0, currentDirectory.length() - 1, currentDirectory.toString());

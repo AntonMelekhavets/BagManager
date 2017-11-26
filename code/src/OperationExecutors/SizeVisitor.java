@@ -7,10 +7,10 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class FileSizeVisitor extends SimpleFileVisitor<Path> {
+public class SizeVisitor extends SimpleFileVisitor<Path> {
 	private long size;
 
-	public FileSizeVisitor() {
+	public SizeVisitor() {
 		size = 0;
 	}
 

@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class FileDeleteVisitor extends SimpleFileVisitor<Path> {
+public class DeleteVisitor extends SimpleFileVisitor<Path> {
 	public FileVisitResult visitFile(Path path, BasicFileAttributes fileAttributes) throws IOException {
 		path.toFile().setWritable(true);
 		path.toFile().delete();
