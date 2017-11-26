@@ -1,5 +1,6 @@
 package View;
 
+import Model.FileInformation;
 import OperationExecutors.OperationThread;
 import View.Controller.DialogWindowController;
 import View.Controller.MainWindowController;
@@ -26,8 +27,8 @@ public class GUICreator extends Application {
 	private StringBuffer baseDirectoryForTableTwo = new StringBuffer("D:\\");
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	private ObservableList<Model.FileInformationOne> fileDataFirst = FXCollections.observableArrayList();
-	private ObservableList<Model.FileInformationTwo> fileDataSecond = FXCollections.observableArrayList();
+	private ObservableList<FileInformation> fileDataFirst = FXCollections.observableArrayList();
+	private ObservableList<FileInformation> fileDataSecond = FXCollections.observableArrayList();
 	private ObservableList<String> listOfRootsForTableOne = FXCollections.observableArrayList();
 	private ObservableList<String> listOfRootsForTableTwo = FXCollections.observableArrayList();
 
@@ -110,9 +111,9 @@ public class GUICreator extends Application {
 				imageViewFirst = new ImageView(new Image("file:Source\\Directory.png"));
 				imageViewSecond = new ImageView(new Image("file:Source\\Directory.png"));
 			}
-			fileDataFirst.add(new Model.FileInformationOne(fileList[i].getName(), Files.getAttribute
+			fileDataFirst.add(new FileInformation(fileList[i].getName(), Files.getAttribute
 					(Paths.get(fileList[i].getPath()),"creationTime").toString().substring(0, 10), imageViewFirst, fileList[i]));
-			fileDataSecond.add(new Model.FileInformationTwo(fileList[i].getName(), Files.getAttribute
+			fileDataSecond.add(new FileInformation(fileList[i].getName(), Files.getAttribute
 					(Paths.get(fileList[i].getPath()), "creationTime").toString().substring(0, 10), imageViewSecond, fileList[i]));
 		}
 	}
@@ -126,7 +127,7 @@ public class GUICreator extends Application {
 				imageViewFirst = new ImageView(new Image("file:Source\\File.png"));
 			else
 				imageViewFirst = new ImageView(new Image("file:Source\\Directory.png"));
-			fileDataFirst.add(new Model.FileInformationOne(fileList[i].getName(), Files.getAttribute
+			fileDataFirst.add(new FileInformation(fileList[i].getName(), Files.getAttribute
 					(Paths.get(fileList[i].getPath()),"creationTime").toString().substring(0, 10), imageViewFirst, fileList[i]));
 		}
 	}
@@ -140,16 +141,16 @@ public class GUICreator extends Application {
 				imageViewSecond = new ImageView(new Image("file:Source\\File.png"));
 			else
 				imageViewSecond = new ImageView(new Image("file:Source\\Directory.png"));
-			fileDataSecond.add(new Model.FileInformationTwo(fileList[i].getName(), Files.getAttribute
+			fileDataSecond.add(new FileInformation(fileList[i].getName(), Files.getAttribute
 					(Paths.get(fileList[i].getPath()), "creationTime").toString().substring(0, 10), imageViewSecond, fileList[i]));
 		}
 	}
 
-	public ObservableList<Model.FileInformationOne> getFileDataFirst() {
+	public ObservableList<FileInformation> getFileDataFirst() {
 		return fileDataFirst;
 	}
 
-	public ObservableList<Model.FileInformationTwo> getFileDataSecond() {
+	public ObservableList<FileInformation> getFileDataSecond() {
 		return fileDataSecond;
 	}
 
