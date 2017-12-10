@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class MainWindowController {
+    private static GUICreator guiCreator;
     @FXML
     private TableView<FileInformation> fileTableOne;
     @FXML
@@ -27,7 +28,6 @@ public class MainWindowController {
     @FXML
     private TableColumn<FileInformation, ImageView> fileTypeOne;
     private DirectoryMemento directoryMementoFirst;
-
     @FXML
     private TableView<FileInformation> fileTableTwo;
     @FXML
@@ -37,12 +37,26 @@ public class MainWindowController {
     @FXML
     private TableColumn<FileInformation, ImageView> fileTypeTwo;
     private DirectoryMemento directoryMementoSecond;
-
     @FXML
     private ComboBox<String> listOfRootsForTableOne;
     @FXML
     private ComboBox<String> listOfRootsForTableTwo;
-    private static GUICreator guiCreator;
+
+    public static GUICreator getMainApp() {
+        return guiCreator;
+    }
+
+    public void setMainApp(GUICreator mainApp) {
+        MainWindowController.guiCreator = mainApp;
+        fileTableOne.setItems(mainApp.getFileDataFirst());
+        fileTableTwo.setItems(mainApp.getFileDataSecond());
+        listOfRootsForTableOne.setItems(mainApp.getListOfRootsForTableOne());
+        listOfRootsForTableTwo.setItems(mainApp.getListOfRootsForTableTwo());
+    }
+
+    public static GUICreator getGuiCreator() {
+        return guiCreator;
+    }
 
     public void savePrevDirectory(String currentDirectory, int number) {
         switch (number) {
@@ -98,13 +112,9 @@ public class MainWindowController {
         guiCreator.createNewListOfFilesForTableTwo();
     }
 
-    public static GUICreator getMainApp() {
-        return guiCreator;
-    }
-
     private void goNextDirectory(FileInformation file, TableView<FileInformation> tableView) throws IOException {
         StringBuffer currentDirectory;
-        if(fileTableTwo.equals(tableView)) {
+        if (fileTableTwo.equals(tableView)) {
             currentDirectory = guiCreator.getCurrentDirectoryForSecond();
             savePrevDirectory(currentDirectory.toString(), 2);
             currentDirectory.replace(0, currentDirectory.length() - 1,
@@ -112,7 +122,7 @@ public class MainWindowController {
             guiCreator.setDirectoryForSecond(currentDirectory.toString());
             guiCreator.createNewListOfFilesForTableTwo();
         }
-        if(fileTableOne.equals(tableView)) {
+        if (fileTableOne.equals(tableView)) {
             currentDirectory = guiCreator.getCurrentDirectoryForFirst();
             savePrevDirectory(currentDirectory.toString(), 1);
             currentDirectory.replace(0, currentDirectory.length() - 1,
@@ -228,10 +238,6 @@ public class MainWindowController {
         renameOperation(fileTableOne);
     }
 
-    public static GUICreator getGuiCreator() {
-        return guiCreator;
-    }
-
     @FXML
     private void renameFileForTableTwo() throws IOException {
         renameOperation(fileTableTwo);
@@ -267,24 +273,16 @@ public class MainWindowController {
                 .addListener((observable, oldValue, newValue) -> showFileInSecondTable(newValue));
     }
 
-    public void setMainApp(GUICreator mainApp) {
-        MainWindowController.guiCreator = mainApp;
-        fileTableOne.setItems(mainApp.getFileDataFirst());
-        fileTableTwo.setItems(mainApp.getFileDataSecond());
-        listOfRootsForTableOne.setItems(mainApp.getListOfRootsForTableOne());
-        listOfRootsForTableTwo.setItems(mainApp.getListOfRootsForTableTwo());
-    }
-
     @FXML
     private void goToPreviousDirectoryForTableOne() throws IOException {
-            guiCreator.setDirectoryForFirst(getPrevDirectory(1));
-            guiCreator.createNewListOfFilesForTableOne();
+        guiCreator.setDirectoryForFirst(getPrevDirectory(1));
+        guiCreator.createNewListOfFilesForTableOne();
     }
 
     @FXML
     private void goToPreviousDirectoryForTableTwo() throws IOException {
-            guiCreator.setDirectoryForSecond(getPrevDirectory(2));
-            guiCreator.createNewListOfFilesForTableTwo();
+        guiCreator.setDirectoryForSecond(getPrevDirectory(2));
+        guiCreator.createNewListOfFilesForTableTwo();
     }
 
     @FXML

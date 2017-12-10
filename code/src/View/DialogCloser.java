@@ -5,21 +5,21 @@ import java.io.IOException;
 import javafx.stage.Stage;
 
 public class DialogCloser implements Runnable {
-	Stage stage;
-	GUICreator mainApp;
-	
-	public DialogCloser(Stage stage, GUICreator mainApp) {
-		this.stage = stage;
-		this.mainApp = mainApp;
-	}
+    private Stage stage;
+    private GUICreator mainApp;
 
-	public void run() {
-		stage.close();
-		try {
-			mainApp.createNewListOfFilesForTableOne();
-			mainApp.createNewListOfFilesForTableTwo();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    public DialogCloser(Stage stage, GUICreator mainApp) {
+        this.stage = stage;
+        this.mainApp = mainApp;
+    }
+
+    public void run() {
+        stage.close();
+        try {
+            mainApp.createNewListOfFilesForTableOne();
+            mainApp.createNewListOfFilesForTableTwo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
