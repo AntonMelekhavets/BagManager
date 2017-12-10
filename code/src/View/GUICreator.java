@@ -23,22 +23,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GUICreator extends Application {
-	private StringBuffer baseDirectoryForTableOne = new StringBuffer("D:\\");
-	private StringBuffer baseDirectoryForTableTwo = new StringBuffer("D:\\");
-	private Stage primaryStage;
-	private BorderPane rootLayout;
+    private StringBuffer baseDirectoryForTableOne;
+    private StringBuffer baseDirectoryForTableTwo;
+    private Stage primaryStage;
+    private BorderPane rootLayout;
 	private ObservableList<FileInformation> fileDataFirst = FXCollections.observableArrayList();
 	private ObservableList<FileInformation> fileDataSecond = FXCollections.observableArrayList();
 	private ObservableList<String> listOfRootsForTableOne = FXCollections.observableArrayList();
 	private ObservableList<String> listOfRootsForTableTwo = FXCollections.observableArrayList();
 
 	public void setDirectoryForFirst(String directory) {
-		baseDirectoryForTableOne.replace(0, baseDirectoryForTableOne.length() - 1, directory);
-	}
+        baseDirectoryForTableOne.replace(0, baseDirectoryForTableOne.length(), directory);
+    }
 
 	public void setDirectoryForSecond(String directory) {
-		baseDirectoryForTableTwo.replace(0, baseDirectoryForTableTwo.length() - 1, directory);
-	}
+        baseDirectoryForTableTwo.replace(0, baseDirectoryForTableTwo.length(), directory);
+    }
 
 	public StringBuffer getCurrentDirectoryForFirst() {
 		return baseDirectoryForTableOne;
@@ -99,9 +99,13 @@ public class GUICreator extends Application {
 		File fileRoot[] = File.listRoots();
 		for (int i = 0; i < fileRoot.length; i++) {
 			listOfRootsForTableTwo.add(fileRoot[i].toString());
-			listOfRootsForTableOne.add(fileRoot[i].toString());
-		}
-		ImageView imageViewFirst, imageViewSecond;
+            baseDirectoryForTableTwo = new StringBuffer(fileRoot[0].toString()
+            );
+            listOfRootsForTableOne.add(fileRoot[i].toString());
+            baseDirectoryForTableOne = new StringBuffer(fileRoot[0].toString()
+            );
+        }
+        ImageView imageViewFirst, imageViewSecond;
 		File fileList[] = new File(baseDirectoryForTableOne.toString()).listFiles();
 		for (int i = 0; i < fileList.length; i++) {
 			if (fileList[i].isFile()) {
